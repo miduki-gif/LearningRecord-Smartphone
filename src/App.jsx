@@ -1,7 +1,8 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { InputForm } from "./components/InputForm";
 import { Insert } from "./components/Insert";
 import { ListDisplay } from "./components/ListDisplay";
+// import { learnRecordTestData } from "../Utils/supabaseFunction";
 
 export const App = () =>{
 
@@ -10,6 +11,7 @@ const [inputs, setInputs] = useState({ content: "", time:""});
 const [records, setReCords] = useState([]);
  const [error, setError] = useState("");
  const [totalTime, serTotalTime] = useState(0);
+
 
 const handleChange = (e) => {
   const {name, value } = e.target;
