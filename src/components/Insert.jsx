@@ -1,3 +1,6 @@
+import PropTypes from 'prop-types';
+
+
 export const Insert = (props) =>{
   const {onClick} =props;
   return(
@@ -6,4 +9,9 @@ export const Insert = (props) =>{
 
       </>
   );
-}
+};
+
+//関数型でかつ必須であることを保証
+Insert.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
