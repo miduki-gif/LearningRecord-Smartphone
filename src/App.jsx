@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { InputForm } from "./components/InputForm";
 import { ListDisplay } from "./components/ListDisplay";
 import { getLearnRecords } from "../utils/SupabaseFunction";
-import { RecordData } from "../utils/RecordData";
+// import { RecordData } from "../utils/RecordData";
 import { supabase } from "../utils/Supabase";
 
 export const App = () => {
   const [inputs, setInputs] = useState({ content: "", time: "" });
 
-  const [records, setReCords] = useState([]);
+  const [records, setRecords] = useState([]);
   const [error, setError] = useState("");
   const [totalTime, serTotalTime] = useState(0);
   const [getDatabase, setGetDatabase] = useState([]);
@@ -73,7 +73,7 @@ export const App = () => {
     }
     //入力したデータをリストに追加する
     const newRecords = [...records, newRecord];
-    setReCords(newRecords);
+    setRecords(newRecords);
     //学習内容、学習時間の入力欄を初期化する
     setInputs({ content: "", time: "" });
     //エラーも初期化する
@@ -94,6 +94,8 @@ export const App = () => {
       .from("study-record")
       .delete()
       .eq("id", id);
+      console.log("IDの型:", typeof id); 
+      console.log("IDの内容:", id);
       //エラーがあれば例外を投げる
       if (error) {
         throw error;
@@ -101,10 +103,12 @@ export const App = () => {
     } catch (error) {
       //正常にデータが削除できなかった際にエラーをコンソールに表示する
       console.error("Error deleteData:", error);
-      console.log("IDの型:", typeof id); 
-console.log("IDの内容:", id);
+      console.log("getDatabaseの中身:", getDatabase);
       return;
     }
+    const newRecords = records.filter((id, record) => record.id !=id);
+    setRecords(newRecords);
+    console.log("削除後のrecords:", newRecords);
   }
   return loading ? (
     <h2>Loading...</h2>
@@ -127,7 +131,15 @@ console.log("IDの内容:", id);
       />
       <p>入力されている学習内容: {inputs.content}</p>
       <p>入力されている時間: {inputs.time}時間</p>
-      <RecordData data={getDatabase} onClickDelete={deleteRecord}/>
+      <ul style={{listStyle:"none"}}>
+        {getDatabase.map((record) => (
+          <li key={record.id}>{record.content}{record.time}時間
+          <button onClick={() => deleteRecord(record.id)}>削除</button>
+          </li>
+        )
+        )}
+      </ul>
+      {/* <RecordData data={getDatabase} onClickDelete={deleteRecord(records)}/> */}
       <button onClick={handleRegister}>登録</button>
       <div>{error}</div>
       <p>合計時間：{totalTime}/1000（h）</p>
