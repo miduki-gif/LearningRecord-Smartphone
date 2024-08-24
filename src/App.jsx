@@ -106,7 +106,7 @@ export const App = () => {
       console.log("getDatabaseの中身:", getDatabase);
       return;
     }
-    const newRecords = records.filter((id, record) => record.id !=id);
+    const newRecords = records.filter(record => record.id !=id);
     setRecords(newRecords);
     console.log("削除後のrecords:", newRecords);
   }
