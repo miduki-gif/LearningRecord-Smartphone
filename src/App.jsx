@@ -41,7 +41,7 @@ export const App = () => {
   };
 
   const handleRegister = async () => {
-    let newRecord;
+    // let newRecord;
     //学習内容もしくは学習時間のどちらかが入力されていないときに入力されていない項目がありますと表示する
     if (!inputs.content || inputs.time === "" || inputs.time === null) {
       setError("入力されていない項目があります。");
@@ -59,7 +59,7 @@ export const App = () => {
         const { data, error } = await supabase
           .from("study-record")
           .insert({ content: inputs.content, time: parseInt(inputs.time, 10) })
-          .select();
+          .select().single();
         //エラーがあれば例外を投げる
         if (error) {
           throw error;
@@ -67,8 +67,8 @@ export const App = () => {
         console.log(data);
           //入力したデータをリストに追加する
     const newRecords = [...records, data];
-    console.log(newRecord);
     setRecords(newRecords);
+    console.log(newRecords);
     //合計時間を計算
     const newTotalTime = newRecords.reduce(
       (sum, record) => sum + record.time,
@@ -92,31 +92,31 @@ export const App = () => {
     console.log("aaa");
     console.log(id)
 
-    // try {
-    //   const { error } = await supabase
-    //   .from("study-record")
-    //   .delete()
-    //   .eq("id", id);
-    //   console.log(records)
-    //   console.log(id)
-    //   const newRecords = records.filter(i => i.id != id);
-    //   console.log('newRecords length:', newRecords[0]);
-    //   console.log("filteredRecords:", newRecords);
-    //   setRecords([...newRecords]);
-    //   console.log("削除後のrecords:", setRecords);
-    //   console.log("IDの型:", typeof id); 
-    //   console.log("IDの内容:", id);
-      // console.log("削除後のrecords:", newRecords);
-      //エラーがあれば例外を投げる
-    //   if (error) {
-    //     throw error;
-    //   }
-    // } catch (error) {
-      //正常にデータが削除できなかった際にエラーをコンソールに表示する
-  //     console.error("Error deleteData:", error);
-  //     console.log("getDatabaseの中身:", records);
-  //     return;
-  //   }
+    try {
+      const { error } = await supabase
+      .from("study-record")
+      .delete()
+      .eq("id", id);
+      console.log(records)
+      console.log(id)
+      const newRecords = records.filter(i => i.id != id);
+      console.log('newRecords length:', newRecords[0]);
+      console.log("filteredRecords:", newRecords);
+      setRecords([...newRecords]);
+      console.log("削除後のrecords:", setRecords);
+      console.log("IDの型:", typeof id); 
+      console.log("IDの内容:", id);
+      console.log("削除後のrecords:", newRecords);
+      // エラーがあれば例外を投げる
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      // 正常にデータが削除できなかった際にエラーをコンソールに表示する
+      console.error("Error deleteData:", error);
+      console.log("getDatabaseの中身:", records);
+      return;
+    }
   }
   return loading ? (
     <h2>Loading...</h2>
