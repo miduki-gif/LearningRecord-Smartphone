@@ -1,0 +1,12 @@
+name: react Build
+
+on: push
+
+jobs: 
+    build_test:
+      name: build_test
+      runs-on: ubuntu-latest
+
+      steps: 
+        run: npm run build
+        
