@@ -46,6 +46,8 @@ jobs:
       - name: Deploy to Firebase Hosting
         run: |
           ./node_modules/.bin/firebase deploy
+        env:
+          firebase experiments:enable webframeworks
       - name: delete GOOGLE_APPLICATION_CREDENTIAL
         run: rm $GOOGLE_APPLICATION_CREDENTIAL
         if: ${{ always() }}
