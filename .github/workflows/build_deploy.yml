@@ -45,7 +45,7 @@ jobs:
         run: ./node_modules/.bin/firebase use ${{ secrets.FIREBASE_PROJECT_ID }}
       - name: Deploy to Firebase Hosting
         run: |
-          firebase experiments:enable webframeworks
+          ./node_modules/.bin/firebase experiments:enable webframeworks
           ./node_modules/.bin/firebase deploy
       - name: delete GOOGLE_APPLICATION_CREDENTIAL
         run: rm $GOOGLE_APPLICATION_CREDENTIAL
