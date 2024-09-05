@@ -1,10 +1,7 @@
 name: Scheduled deploy
 
-on: 
+on:
   push:
-  # schedule:
-    #毎朝6時に実行される
-    # - cron: '0 6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -43,10 +40,3 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=${{ github.workspace }}/firebase-key.json" >> $GITHUB_ENV
       - name: change space
         run: ./node_modules/.bin/firebase use ${{ secrets.FIREBASE_PROJECT_ID }}
-
-
-
-
-
-
-      
