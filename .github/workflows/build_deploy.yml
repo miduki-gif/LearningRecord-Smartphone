@@ -22,6 +22,9 @@ jobs:
           run: npm install
         - name: Run build
           run: npm run build
+          env:
+            VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+            VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
   deploy:
     name: deploy
@@ -48,8 +51,6 @@ jobs:
           ./node_modules/.bin/firebase deploy
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
-          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
       - name: delete GOOGLE_APPLICATION_CREDENTIAL
         run: export -n $GOOGLE_APPLICATION_CREDENTIAL
         if: ${{ always() }}
