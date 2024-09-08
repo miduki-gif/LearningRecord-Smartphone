@@ -120,7 +120,7 @@ export const App = () => {
     <h2>Loading...</h2>
   ) : (
     <>
-      <h1>学習記録リスト</h1>
+      <h1>学習記録!</h1>
       <InputForm
         name="content"
         value={inputs.content}
