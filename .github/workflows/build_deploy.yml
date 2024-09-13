@@ -47,10 +47,10 @@ jobs:
         run: npm install --save-dev firebase-tools
       - name: Download production artifacts
         uses: actions/download-artifact@v4
-          with:
-            name: dist
-            path: |
-              dist
+        with:
+          name: dist
+          path: |
+            dist
       - name: Webframework Enable
         run: ./node_modules/.bin/firebase experiments:enable webframeworks
       - name: Decode Firebase service account key
