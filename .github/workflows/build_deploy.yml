@@ -26,6 +26,12 @@ jobs:
           env:
             VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
             VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        - name: Archive production artifacts
+          uses: actions/upload-artifact@v4
+          with:
+            name: dist
+            path: |
+              dist
   deploy:
     name: deploy
     runs-on: ubuntu-latest
@@ -40,6 +46,12 @@ jobs:
           cache: "npm"
       - name: Install firebase-tools
         run: npm install --save-dev firebase-tools
+       - name: Download production artifacts
+          uses: actions/download-artifact@v4
+          with:
+            name: dist
+            path: |
+              dist
       - name: Webframework Enable
         run: ./node_modules/.bin/firebase experiments:enable webframeworks
       - name: Decode Firebase service account key
