@@ -5,13 +5,12 @@ on:
   # schedule:
     #毎朝6時に実行される
     # - cron: '0 6 * * *'
-  # workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -39,4 +38,3 @@ jobs:
       - name: delete GOOGLE_APPLICATION_CREDENTIAL
         run: export -n $GOOGLE_APPLICATION_CREDENTIAL
         if: ${{ always() }}
-    
