@@ -39,3 +39,4 @@ jobs:
       - name: delete GOOGLE_APPLICATION_CREDENTIAL
         run: export -n $GOOGLE_APPLICATION_CREDENTIAL
         if: ${{ always() }}
+    
