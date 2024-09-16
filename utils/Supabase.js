@@ -3,10 +3,10 @@ import { createClient } from '@supabase/supabase-js'
 // Create a single supabase client for interacting with your database
 //初期化
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = process.env.VITE_SUPABASE_URL
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY
 
-export const supabase = createClient(
+export const Supabase = createClient(
     supabaseUrl,
     supabaseAnonKey
 );

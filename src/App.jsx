@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { InputForm } from "./components/InputForm";
-import { getLearnRecords } from "../utils/SupabaseFunction";
+import { GetLearnRecords } from "../utils/SupabaseFunction";
 import { RecordData } from "../utils/RecordData";
-import { supabase } from "../utils/Supabase";
+import { Supabase } from "../utils/Supabase";
 
 export const App = () => {
   const [inputs, setInputs] = useState({ content: "", time: "" });
@@ -19,7 +19,7 @@ export const App = () => {
   useEffect(() => {
     const data = async () => {
       try {
-        const recordData = await getLearnRecords();
+        const recordData = await GetLearnRecords();
         console.log(recordData)
         console.log(recordData)
         setRecords(recordData);
@@ -54,9 +54,9 @@ export const App = () => {
     } else {
 
       try {
-        //supabaseのテーブルのcontent,timeというカラムに入力した学習内容、学習時間を登録する
+        //Supabaseのテーブルのcontent,timeというカラムに入力した学習内容、学習時間を登録する
         //学習時間は数値型で10進数に変換
-        const { data, error } = await supabase
+        const { data, error } = await Supabase
           .from("study-record")
           .insert({ content: inputs.content, time: parseInt(inputs.time, 10) })
           .select().single()
@@ -84,12 +84,12 @@ export const App = () => {
   };
 
   const deleteRecord = async (id) => {
-    //supabaseからidを参照してテーブルから削除ボタンを押したデータを削除する
+    //Supabaseからidを参照してテーブルから削除ボタンを押したデータを削除する
     console.log("aaa");
     console.log(id)
 
     try {
-      const { error } = await supabase
+      const { error } = await Supabase
       .from("study-record")
       .delete()
       .eq("id", id);
@@ -120,7 +120,7 @@ export const App = () => {
     <h2>Loading...</h2>
   ) : (
     <>
-      <h1>学習記録</h1>
+      <h1 data-testid="title">学習記録</h1>
       <InputForm
         name="content"
         value={inputs.content}

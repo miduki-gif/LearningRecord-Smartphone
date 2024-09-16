@@ -8,9 +8,35 @@ on:
   workflow_dispatch:
 
 jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps: 
+        - name: Checkout code
+          uses: actions/checkout@v4
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: "20"
+        - name: Install dependencies
+          run: npm install
+        - name: Run build
+          run: npm run build
+          env:
+            VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+            VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        - name: Zone.Identifier Delete
+          run: find ./ -type f -name '*:Zone.Identifier' -exec rm {} \;
+        - name: Archive production artifacts
+          uses: actions/upload-artifact@v4
+          with:
+            name: dist
+            path: |
+              dist
   deploy:
     name: deploy
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,6 +47,12 @@ jobs:
           cache: "npm"
       - name: Install firebase-tools
         run: npm install --save-dev firebase-tools
+      - name: Download production artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: |
+            dist
       - name: Webframework Enable
         run: ./node_modules/.bin/firebase experiments:enable webframeworks
       - name: Decode Firebase service account key
