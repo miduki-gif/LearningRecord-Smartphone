@@ -126,12 +126,14 @@ export const App = () => {
         value={inputs.content}
         onChange={handleInputChange}
         label="学習内容"
+        id="learnContent"
       />
       <InputForm
         name="time"
         value={inputs.time}
         onChange={handleInputChange}
         label="学習時間"
+        id="learnTime"
         suffix="時間"
         pattern="^[0-9]*$"
       />
