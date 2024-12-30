@@ -19,9 +19,12 @@ describe("Title Test",() => {
         //登録ボタンをクリック
         fireEvent.click(submitButton);
         //リストに学習内容が追加されたか確認
-        console.log(screen.debug());
-        const recordList = await screen.findByText('テスト実行');
-        expect(recordList).toBeVisible();
+        // console.log(screen.debug());
+        await waitFor(() => {
+          screen.getByTestId(`${"recordData"}`).querySelectorAll("li");
+          expect("recordData").queryAllByText();
+        });
+        
         //リストに学習時間が表示されているか確認
         // const TimerecordList = await screen.findByText(17);
         // expect(TimerecordList).toBeVisible();
