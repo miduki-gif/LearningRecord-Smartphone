@@ -23,7 +23,9 @@ describe("Title Test",() => {
         await waitFor(() => {
           const recordList = screen.getByTestId(`${"recordData"}`).querySelectorAll("li");
           const lastItem = recordList[recordList.length -1];
-          expect(lastItem).getAllByText();
+          expect(lastItem).getByTestId("content");
+          expect(lastItem).getByTestId("time");
+          expect(lastItem).getByTestId("time-string");
         });
         
         //リストに学習時間が表示されているか確認
