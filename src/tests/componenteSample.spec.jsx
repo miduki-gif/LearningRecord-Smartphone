@@ -21,8 +21,9 @@ describe("Title Test",() => {
         //リストに学習内容が追加されたか確認
         // console.log(screen.debug());
         await waitFor(() => {
-          screen.getByTestId(`${"recordData"}`).querySelectorAll("li");
-          expect("recordData").queryAllByText();
+          recordList = screen.getByTestId(`${"recordData"}`).querySelectorAll("li");
+          recordList[recordList.length -1];
+          expect(recordList).toBeVisible();
         });
         
         //リストに学習時間が表示されているか確認
