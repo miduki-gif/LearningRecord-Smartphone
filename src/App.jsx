@@ -68,7 +68,7 @@ export const App = () => {
           //入力したデータをリストに追加する
     const newRecords = [...records, data];
     setRecords(newRecords);
-    console.log(newRecords);
+    // console.log(newRecords);
     //合計時間を再計算
     setTotalTime(totalTimeCalculate(newRecords));
       } catch (error) {

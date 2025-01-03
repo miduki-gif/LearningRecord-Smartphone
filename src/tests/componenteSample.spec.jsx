@@ -21,16 +21,17 @@ describe("Title Test",() => {
         //リストに学習内容が追加されたか確認
         // console.log(screen.debug());
         await waitFor(() => {
-          const recordList = screen.getByTestId(`${"recordData"}`).querySelectorAll("li");
+          const recordList = screen.getAllByTestId(`${"recordData"}`);
+          //リストが空でないことを確認（toBeGreaterThanは実際の値と期待値を数値で比較するメソッド）
+          expect(recordList.length).toBeGreaterThan(0);
+        });
+          //.querySelectorAll("li");は不要
+          const recordList = screen.getAllByTestId(`${"recordData"}`);
+          console.log("Record list after addition:", recordList);
           const lastItem = recordList[recordList.length -1];
           expect(lastItem).toBeVisible();
           // expect(lastItem).getByTestId("content");
           // expect(lastItem).getByTestId("time");
           // expect(lastItem).getByTestId("time-string");
-        });
-        
-        //リストに学習時間が表示されているか確認
-        // const TimerecordList = await screen.findByText(17);
-        // expect(TimerecordList).toBeVisible();
         });
     });
