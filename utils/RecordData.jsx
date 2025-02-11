@@ -5,9 +5,9 @@ export const RecordData = (props) =>{
         <ul data-testid="recordData" style={{listStyle:"none"}}>
         {data.map((record) => (
           <li key={record.id}>
-            <span>{record.content}</span>
-            <span>{record.time}
-            <span>時間</span>
+            <span data-testid="content">{record.content}</span>
+            <span data-testid="time">{record.time}
+            <span data-testid="time">時間</span>
             </span>
           <button onClick={() => onClickDelete(record.id)}>削除</button>
           </li>

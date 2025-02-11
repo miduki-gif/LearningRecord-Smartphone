@@ -1,7 +1,7 @@
 name: Scheduled deploy
 
 on: 
-  push:
+  # push:
   # schedule:
     #毎朝6時に実行される
     # - cron: '0 6 * * *'

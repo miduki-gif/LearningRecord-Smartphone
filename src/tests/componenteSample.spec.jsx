@@ -27,9 +27,13 @@ describe("Title Test",() => {
         });
           //.querySelectorAll("li");は不要
           const recordList = screen.getAllByTestId(`${"recordData"}`);
-          console.log("Record list after addition:", recordList);
           const lastItem = recordList[recordList.length -1];
           expect(lastItem).toBeVisible();
+          //学習内容と学習時間が画面に表示されているかをテスト
+          const recordContent = screen.getAllByTestId(`${"content"}`);
+          expect(recordContent).toHaveTextContent("テスト実行");
+          const recordTime = screen.getAllByTestId(`${"time"}`);
+          expect(recordTime).toHaveTextContent("17時間");
           // expect(lastItem).getByTestId("content");
           // expect(lastItem).getByTestId("time");
           // expect(lastItem).getByTestId("time-string");

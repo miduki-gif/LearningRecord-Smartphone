@@ -20,8 +20,8 @@ export const App = () => {
     const data = async () => {
       try {
         const recordData = await GetLearnRecords();
-        console.log(recordData)
-        console.log(recordData)
+        // console.log(recordData)
+        // console.log(recordData)
         setRecords(recordData);
         setTotalTime(totalTimeCalculate(recordData));
       } catch (error) {
@@ -85,26 +85,26 @@ export const App = () => {
 
   const deleteRecord = async (id) => {
     //Supabaseからidを参照してテーブルから削除ボタンを押したデータを削除する
-    console.log("aaa");
-    console.log(id)
+    // console.log("aaa");
+    // console.log(id)
 
     try {
       const { error } = await Supabase
       .from("study-record")
       .delete()
       .eq("id", id);
-      console.log(records)
-      console.log(id)
+      // console.log(records)
+      // console.log(id)
       const newRecords = records.filter(i => i.id != id);
-      console.log('newRecords length:', newRecords[0]);
-      console.log("filteredRecords:", newRecords);
+      // console.log('newRecords length:', newRecords[0]);
+      // console.log("filteredRecords:", newRecords);
       setRecords([...newRecords]);
       //合計時間を再計算して表示
       setTotalTime(totalTimeCalculate(newRecords));
-      console.log("削除後のrecords:", setRecords);
-      console.log("IDの型:", typeof id); 
-      console.log("IDの内容:", id);
-      console.log("削除後のrecords:", newRecords);
+      // console.log("削除後のrecords:", setRecords);
+      // console.log("IDの型:", typeof id); 
+      // console.log("IDの内容:", id);
+      // console.log("削除後のrecords:", newRecords);
       // エラーがあれば例外を投げる
       if (error) {
         throw error;
