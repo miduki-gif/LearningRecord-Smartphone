@@ -4,7 +4,7 @@ export const RecordData = (props) =>{
         <>
         <ul data-testid="recordData" style={{listStyle:"none"}}>
         {data.map((record) => (
-          <li key={record.id}>
+          <li key={record.id} data-testid="recordList">
             <span data-testid="content">{record.content}</span>
             <span data-testid="time">{`${record.time}時間`}</span>
           <button onClick={() => onClickDelete(record.id)}>削除</button>

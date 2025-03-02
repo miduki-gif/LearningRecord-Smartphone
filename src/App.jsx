@@ -140,7 +140,7 @@ export const App = () => {
       <p>入力されている学習内容: {inputs.content}</p>
       <p>入力されている時間: {inputs.time}時間</p>
       <RecordData data={records} onClickDelete={deleteRecord}/>
-      <button onClick={handleRecord}>登録</button>
+      <button onClick={handleRecord} data-testid="insertButton">登録</button>
       <div>{error}</div>
       <p>合計時間：{totalTime}/1000（h）</p>
     </>
