@@ -39,14 +39,18 @@ describe("AppComponent_render", () => {
     test("入力した内容を登録して1つ増えていることを確認", 
       async () => {
             const recordList = await screen.findByTestId("recordData");
-            const initalRecordList = within(recordList).findByTestId("recordList");
+            const initalRecordList = await within(recordList).findAllByTestId("recordList");
             const initalCount = initalRecordList.length;
+            const learnRecordForm = await screen.findByLabelText("学習内容");
+            fireEvent.change(learnRecordForm, {target: { value: "test" }});
+            const learnTimeRecordForm = await screen.findByLabelText("学習時間");
+            fireEvent.change(learnTimeRecordForm, {target: { value: 12 }});
             const submitButton = await screen.findByTestId("insertButton");
             fireEvent.click(submitButton);
 
         await waitFor (async () => {
             const updateRecordList = await screen.findByTestId("recordData");
-            const updatedItem = await within(updateRecordList).findByTestId("recordList");
+            const updatedItem = await within(updateRecordList).findAllByTestId("recordList");
             expect(updatedItem.length).toBe(initalCount + 1 );
             
             //登録したアイテムが表示されているか確認
