@@ -6,9 +6,7 @@ export const RecordData = (props) =>{
         {data.map((record) => (
           <li key={record.id}>
             <span data-testid="content">{record.content}</span>
-            <span data-testid="time">{record.time}
-            <span data-testid="time">時間</span>
-            </span>
+            <span data-testid="time">{`${record.time}時間`}</span>
           <button onClick={() => onClickDelete(record.id)}>削除</button>
           </li>
         )
